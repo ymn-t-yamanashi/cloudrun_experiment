@@ -11,8 +11,10 @@ RUN mix local.rebar --force && mix local.hex --force
 COPY . .
 ENV MIX_ENV="prod" 
 
-RUN mix do deps.get, deps.compile, compile
+RUN mix do deps.get, deps.compile
 RUN mix phx.digest
+RUN mix assets.deploy
+RUN mix compile
 
 RUN mix release 
 
